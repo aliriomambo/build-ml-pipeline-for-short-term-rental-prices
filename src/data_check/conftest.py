@@ -9,6 +9,8 @@ def pytest_addoption(parser):
     parser.addoption("--kl_threshold", action="store")
     parser.addoption("--min_price", action="store")
     parser.addoption("--max_price", action="store")
+    parser.addoption("--atol", action="store", default=1e-6)
+    parser.addoption("--rtol", action="store", default=1e-6)
 
 
 @pytest.fixture(scope='session')
@@ -69,3 +71,19 @@ def max_price(request):
         pytest.fail("You must provide max_price")
 
     return float(max_price)
+
+
+@pytest.fixture(scope="session")
+def atol(request):
+    """
+    This fixture returns the value of the atol parameter
+    """
+    return float(request.config.getoption("--atol"))
+
+
+@pytest.fixture(scope="session")
+def rtol(request):
+    """
+    This fixture returns the value of the rtol parameter
+    """
+    return float(request.config.getoption("--rtol"))
