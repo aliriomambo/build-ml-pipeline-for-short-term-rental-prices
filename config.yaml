@@ -35,6 +35,7 @@ modeling:
     # Here -1 means all available cores
     n_jobs: -1
     criterion: squared_error
-    max_features: 0.5
+    max_features: 0.33
+    max_tfidf_features: 30
     # DO not change the following
     oob_score: true
