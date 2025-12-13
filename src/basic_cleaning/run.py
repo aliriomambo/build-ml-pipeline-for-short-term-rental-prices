@@ -39,6 +39,10 @@ def go(args):
     logger.info(f"Filtering price between {args.min_price} and {args.max_price}")
     df = df.query(f'{args.min_price} <= price <= {args.max_price}').copy()
 
+    # Fix boundaries for longitude and latitude
+    idx = df['longitude'].between(-74.25, -73.50) & df['latitude'].between(40.5, 41.2)
+    df = df[idx].copy()
+
     # Save the cleaned DataFrame
     output_file = "clean_sample.csv"
     df.to_csv(output_file, index=False)
